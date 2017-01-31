@@ -5,4 +5,5 @@ export default `
   user-select: none;
   will-change: transform;
   -webkit-transform: translateZ(0px);
+  -webkit-font-smoothing: subpixel-antialiased;
 }`
