@@ -3,10 +3,10 @@
 <head>
   <title>shaf-button</title>
   <script src="https://unpkg.com/@webcomponents/custom-elements@1.0.0-alpha.3"></script>
-  <script src="https://unpkg.com/shaf-button@1.0.0"></script>
+  <script src="https://unpkg.com/shaf-button@1.0.2"></script>
   <style>
-  .simple-button {
-    background: linear-gradient(to bottom, #00b7ea 0%,#009ec3 100%);
+  .my-styled-button {
+    background: linear-gradient(to bottom, #00b7ea 0%, #009ec3 100%);
     border-radius: 5px;
     border: 0 none;
     color: white;
@@ -15,10 +15,10 @@
     user-select: none;
     outline: none;
   }
-  .simple-button:active {
+  .my-styled-button:active {
     color: white;
   }
-  .simple-button:focus {
+  .my-styled-button:focus {
     color: white;
   }
   </style>
@@ -29,7 +29,7 @@
     <p>View source to see usage.</p>
     <h2>Example 1 (simple button)</h2>
     <shaf-button>
-      <button class="simple-button">
+      <button class="my-styled-button">
         Push my corners
       </button>
     </shaf-button>
