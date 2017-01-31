@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>shaf-button</title>
+  <script src="https://unpkg.com/@webcomponents/custom-elements@1.0.0-alpha.3"></script>
+  <script src="https://unpkg.com/shaf-button@1.0.0"></script>
+  <style>
+  .simple-button {
+    background: linear-gradient(to bottom, #00b7ea 0%,#009ec3 100%);
+    border-radius: 5px;
+    border: 0 none;
+    color: white;
+    padding: 8px 16px;
+    font-size: 1.1rem;
+    user-select: none;
+    outline: none;
+  }
+  .simple-button:active {
+    color: white;
+  }
+  .simple-button:focus {
+    color: white;
+  }
+  </style>
+</head>
+<body>
+  <div style="margin: 48px;">
+    <h1>shaf-button</h1>
+    <p>View source to see usage.</p>
+    <h2>Example 1 (simple button)</h2>
+    <shaf-button>
+      <button class="simple-button">
+        Push my corners
+      </button>
+    </shaf-button>
+    <p>Force-touch works in Safari as well (if your device supports it).</p>
+  </div>
+
+  <!-- script src="https://unpkg.com/github-corner@2.0.2"></script>
+  <github-corner>
+    <a href="https://github.com/aaronshaf/shaf-button">GitHub</a>
+  </github-corner -->
+</body>
