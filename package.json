@@ -25,7 +25,7 @@
   "homepage": "https://github.com/aaronshaf/shaf-button#readme",
   "name": "shaf-button",
   "description": "Upgrade your buttons, force-touch them, make them springy and delightful",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "directories": {
     "doc": "docs"
