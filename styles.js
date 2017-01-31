@@ -4,4 +4,5 @@ export default `
   transform: rotateX(0deg) rotateY(0deg);
   user-select: none;
   will-change: transform;
+  -webkit-transform: translateZ(0px);
 }`
