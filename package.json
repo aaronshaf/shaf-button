@@ -22,5 +22,18 @@
   "bugs": {
     "url": "https://github.com/aaronshaf/shaf-button/issues"
   },
-  "homepage": "https://github.com/aaronshaf/shaf-button#readme"
+  "homepage": "https://github.com/aaronshaf/shaf-button#readme",
+  "name": "shaf-button",
+  "description": "Upgrade your buttons, force-touch them, make them springy and delightful",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "button",
+    "custom",
+    "element"
+  ]
 }
