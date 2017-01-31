@@ -8,14 +8,16 @@
   <style>
   .my-styled-button {
     background: linear-gradient(to bottom, #00b7ea 0%, #009ec3 100%);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    user-select: none;
     border-radius: 5px;
     border: 0 none;
     color: white;
     padding: 8px 16px;
     font-size: 1.1rem;
-    user-select: none;
     -webkit-user-select: none;
     outline: none;
+    position: relative;
   }
   .my-styled-button:active {
     color: white;
@@ -29,7 +31,7 @@
   <div style="margin: 48px;">
     <h1>shaf-button</h1>
     <p>View source to see usage.</p>
-    <h2>Example (simple button)</h2>
+    <h2>Example</h2>
     <shaf-button>
       <button class="my-styled-button">
         Push my corners

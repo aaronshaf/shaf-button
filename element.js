@@ -10,41 +10,70 @@ export default createElementClass({
   connectedCallback () {
     this.button = document.querySelector('button')
     this.classList.add('shaf-button')
+    this.reset()
+
+    this.reset = this.reset.bind(this)
+    this.handlePress = this.handlePress.bind(this)
+    this.handleUnpress = this.handleUnpress.bind(this)
+    this.handleMove = this.handleMove.bind(this)
+    this.handleTouchStart = this.handleTouchStart.bind(this)
+    this.handleTouchMove = this.handleTouchMove.bind(this)
+    this.handlePointerDown = this.handlePointerDown.bind(this)
+
+    this.button.addEventListener('blur', this.handleUnpress)
+    this.button.addEventListener('mousedown', this.handlePress)
+    this.button.addEventListener('mousemove', this.handleMove)
+    this.button.addEventListener('touchstart', this.handleTouchStart)
+    this.button.addEventListener('touchmove', this.handleTouchMove)
+    this.button.addEventListener('pointerdown', this.handlePointerDown)
+    this.button.addEventListener('pointermove', this.handleMove)
+    this.button.addEventListener('webkitmouseforcedown', this.handleMove)
+    this.button.addEventListener('webkitmouseforcechanged', this.handleMove)
+  },
+  reset () {
     this.relativeXRatio = 0.5
     this.relativeYRatio = 0.5
     this.rotateX
     this.rotateY
     this.extraScale = 0
     this.isMouseDown = false
-
-    this.press = this.press.bind(this)
-    this.unpress = this.unpress.bind(this)
-    this.mousemove = this.mousemove.bind(this)
-
-    this.button.addEventListener('blur', this.unpress)
-    this.button.addEventListener('mousedown', this.press)
-    this.button.addEventListener('touchstart', this.press)
-    this.button.addEventListener('mousemove', this.mousemove)
-    this.button.addEventListener('touchmove', this.mousemove)
-    this.button.addEventListener('webkitmouseforcedown', this.mousemove)
-    this.button.addEventListener('webkitmouseforcechanged', this.mousemove)
+    this.wasTouched = false
+  },
+  handlePointerDown (event) {
+    if (event.pointerType === 'touch') {
+      this.wasTouched = true
+    }
+    this.handlePress(event)
+  },
+  handleTouchStart (event) {
+    this.wasTouched = true
+    this.handlePress(event)
+  },
+  handleTouchMove (event) {
+    this.wasTouched = true
+    this.handleMove(event)
   },
   detachedCallback () {
-    this.button.removeEventListener('blur', this.unpress)
-    this.button.removeEventListener('mousedown', this.press)
-    this.button.removeEventListener('mousemove', this.mousemove)
-    this.button.removeEventListener('webkitmouseforcedown', this.mousemove)
-    this.button.removeEventListener('webkitmouseforcechanged', this.mousemove)
+    this.button.removeEventListener('blur', this.handleUnpress)
+    this.button.removeEventListener('mousedown', this.handlePress)
+    this.button.removeEventListener('touchstart', this.handlePress)
+    this.button.removeEventListener('handleMove', this.handleMove)
+    this.button.removeEventListener('touchmove', this.handleMove)
+    this.button.removeEventListener('webkitmouseforcedown', this.handleMove)
+    this.button.removeEventListener('webkitmouseforcechanged', this.handleMove)
   },
-  press (event) {
+  handlePress (event) {
     this.isMouseDown = true
-    this.extraScale = getRealPressure(event) - 1
+    const extraScaleFromPressure = getRealPressure(event) - 1
+    const extraScaleFromTouch = this.wasTouched ? 0.2 : 0
+    this.extraScale = extraScaleFromPressure + extraScaleFromTouch
     this.button.style.transform = `perspective(500px) rotateX(${this.rotateY *
       (-1)}deg) rotateY(${this.rotateX}deg) scale(${0.98 -
       this.extraScale * 0.05})`
-    document.addEventListener('mouseup', this.unpress)
+    document.addEventListener('mouseup', this.handleUnpress)
+    document.addEventListener('pointercancel', this.handleUnpress)
   },
-  unpress () {
+  handleUnpress () {
     this.isMouseDown = false
     this.button.style.transform = `perspective(500px) rotateX(${this.rotateY *
       1.1}deg) rotateY(${this.rotateX * (-1.1)}deg) scale(${1.02 +
@@ -52,21 +81,22 @@ export default createElementClass({
     setTimeout(
       () => {
         this.button.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)'
+        this.reset()
       },
       100
     )
-    document.removeEventListener('blur', this.unpress)
+    document.removeEventListener('blur', this.handleUnpress)
   },
-  mousemove (event) {
+  handleMove (event) {
     this.extraScale = getRealPressure(event) - 1
     this.relativeXRatio = (event.pageX - this.button.offsetLeft) /
       this.button.offsetWidth
     this.relativeYRatio = (event.pageY - this.button.offsetTop) /
       this.button.offsetHeight
-    this.rotateX = -5 + this.relativeXRatio * 10
-    this.rotateY = -5 + this.relativeYRatio * 10
+    this.rotateX = -8 + this.relativeXRatio * 16
+    this.rotateY = -8 + this.relativeYRatio * 16
     if (this.isMouseDown) {
-      this.press(event)
+      this.handlePress(event)
     }
   }
 })
@@ -79,5 +109,5 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function getRealPressure (event) {
-  return event.pressure || event.force || event.webkitForce || 1
+  return event.handlePressure || event.force || event.webkitForce || 1
 }

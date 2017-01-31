@@ -1,6 +1,6 @@
 export default `
 .shaf-button {
-  transition: transform 0.05s;
+  transition: transform 0.3s;
   transform: rotateX(0deg) rotateY(0deg);
   will-change: transform;
   user-select: none;
