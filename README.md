@@ -2,6 +2,8 @@
 
 Check out the [demo](https://aaronshaf.github.io/shaf-button/).
 
+<img src="https://d3vv6lp55qjaqc.cloudfront.net/items/3O1n3i3Z0Y2f2e233M1l/Screen%20Recording%202017-01-31%20at%2009.56%20AM.gif?X-CloudApp-Visitor-Id=2785f610d78799cc3528493040d9b583&v=0006f9c3" height="66px" />
+
 ```html
 <!-- Custom Elements v1 polyfill (2.7KB gzipped) -->
 <script src="https://unpkg.com/@webcomponents/custom-elements@1.0.0-alpha.3"></script>
