@@ -13,6 +13,7 @@ export default createElementClass({
     this.reset()
 
     this.reset = this.reset.bind(this)
+    this.setScaleAndRotation = this.setScaleAndRotation.bind(this)
     this.handlePress = this.handlePress.bind(this)
     this.handleUnpress = this.handleUnpress.bind(this)
     this.handleMove = this.handleMove.bind(this)
@@ -70,11 +71,12 @@ export default createElementClass({
   },
   handlePress (event) {
     this.isMouseDown = true
+    this.setScaleAndRotation(event)
     const extraScaleFromPressure = getRealPressure(event) - 1
     const extraScaleFromTouch = this.wasTouched ? 0.2 : 0
     this.extraScale = extraScaleFromPressure + extraScaleFromTouch
     this.button.style.transform = `perspective(500px) rotateX(${this.rotateY *
-      (-1)}deg) rotateY(${this.rotateX}deg) scale(${0.98 -
+      (-1)}deg) rotateY(${this.rotateX}deg) scale(${0.96 -
       this.extraScale * 0.05})`
     document.addEventListener('mouseup', this.handleUnpress)
     document.addEventListener('pointercancel', this.handleUnpress)
@@ -85,27 +87,26 @@ export default createElementClass({
     this.isMouseDown = false
     this.button.style.transform = `perspective(500px) rotateX(${this.rotateY *
       1.05}deg) rotateY(${this.rotateX * (-1.05)}deg) scale(${1.01 +
-      this.extraScale * 0.03})`
-    setTimeout(
-      () => {
-        this.button.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)'
-      },
-      100
-    )
+      this.extraScale * 0.06})`
+    setTimeout(() => {
+      this.button.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)'
+    }, 60)
     this.reset()
     document.removeEventListener('blur', this.handleUnpress)
   },
   handleMove (event) {
+    if (this.isMouseDown) {
+      this.handlePress(event)
+    }
+  },
+  setScaleAndRotation (event) {
     this.extraScale = getRealPressure(event) - 1
     this.relativeXRatio = (event.pageX - this.button.offsetLeft) /
       this.button.offsetWidth
     this.relativeYRatio = (event.pageY - this.button.offsetTop) /
       this.button.offsetHeight
-    this.rotateX = -8 + this.relativeXRatio * 16
-    this.rotateY = -8 + this.relativeYRatio * 16
-    if (this.isMouseDown) {
-      this.handlePress(event)
-    }
+    this.rotateX = -10 + this.relativeXRatio * 20
+    this.rotateY = -10 + this.relativeYRatio * 20
   }
 })
 
