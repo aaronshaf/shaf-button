@@ -56,11 +56,17 @@ export default createElementClass({
   detachedCallback () {
     this.button.removeEventListener('blur', this.handleUnpress)
     this.button.removeEventListener('mousedown', this.handlePress)
-    this.button.removeEventListener('touchstart', this.handlePress)
-    this.button.removeEventListener('handleMove', this.handleMove)
-    this.button.removeEventListener('touchmove', this.handleMove)
+    this.button.removeEventListener('mousemove', this.handleMove)
+    this.button.removeEventListener('touchstart', this.handleTouchStart)
+    this.button.removeEventListener('touchmove', this.handleTouchMove)
+    this.button.removeEventListener('pointerdown', this.handlePointerDown)
+    this.button.removeEventListener('pointermove', this.handleMove)
     this.button.removeEventListener('webkitmouseforcedown', this.handleMove)
     this.button.removeEventListener('webkitmouseforcechanged', this.handleMove)
+    document.removeEventListener('mouseup', this.handleUnpress)
+    document.removeEventListener('pointercancel', this.handleUnpress)
+    document.removeEventListener('pointerup', this.handleUnpress)
+    document.removeEventListener('touchend', this.handleUnpress)
   },
   handlePress (event) {
     this.isMouseDown = true
@@ -72,6 +78,8 @@ export default createElementClass({
       this.extraScale * 0.05})`
     document.addEventListener('mouseup', this.handleUnpress)
     document.addEventListener('pointercancel', this.handleUnpress)
+    document.addEventListener('pointerup', this.handleUnpress)
+    document.addEventListener('touchend', this.handleUnpress)
   },
   handleUnpress () {
     this.isMouseDown = false
@@ -81,10 +89,10 @@ export default createElementClass({
     setTimeout(
       () => {
         this.button.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)'
-        this.reset()
       },
       100
     )
+    this.reset()
     document.removeEventListener('blur', this.handleUnpress)
   },
   handleMove (event) {
