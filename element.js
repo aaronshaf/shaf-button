@@ -84,8 +84,8 @@ export default createElementClass({
   handleUnpress () {
     this.isMouseDown = false
     this.button.style.transform = `perspective(500px) rotateX(${this.rotateY *
-      1.1}deg) rotateY(${this.rotateX * (-1.1)}deg) scale(${1.02 +
-      this.extraScale * 0.04})`
+      1.05}deg) rotateY(${this.rotateX * (-1.05)}deg) scale(${1.01 +
+      this.extraScale * 0.03})`
     setTimeout(
       () => {
         this.button.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)'
