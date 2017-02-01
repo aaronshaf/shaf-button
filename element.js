@@ -90,7 +90,7 @@ export default createElementClass({
       this.extraScale * 0.06})`
     setTimeout(() => {
       this.button.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)'
-    }, 60)
+    }, 50)
     this.reset()
     document.removeEventListener('blur', this.handleUnpress)
   },
