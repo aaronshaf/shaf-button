@@ -9,5 +9,8 @@ export default `
   -webkit-transform: translateZ(0px);
   -webkit-font-smoothing: subpixel-antialiased;
   touch-action: manipulation;
-  user-select: none;-webkit-tap-highlight-color: rgba(0,0,0,0);
+  user-select: none;
+  tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  outline:none;
 }`
