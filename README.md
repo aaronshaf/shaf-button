@@ -26,7 +26,6 @@ Upgrade your buttons, force-touch them, make them springy and delightful. Force-
   color: white;
   padding: 8px 16px;
   font-size: 1.1rem;
-  user-select: none;
   outline: none;
 }
 ```
