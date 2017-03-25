@@ -7,7 +7,16 @@ export default createElementClass({
       this.updateRendering()
     }
   },
-  connectedCallback () {
+  connectedCallback() {
+    if (this.querySelector('button')) {
+      this.init()
+    } else {
+      window.requestAnimationFrame(() => {
+        this.init()
+      })
+    }
+  },
+  init () {
     this.button = document.querySelector('button')
     this.classList.add('shaf-button')
     this.reset()
